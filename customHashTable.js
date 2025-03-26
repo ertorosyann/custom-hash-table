@@ -25,7 +25,7 @@ class HashTable {
 
     for (let i = 0; i < inputString.length; i++) {
       let character = inputString[i];
-      hashValue = (hashValue + character.charCodeAt(0) * basePower) % modulus; // Используем просто charCodeAt
+      hashValue = (hashValue + character.charCodeAt(0) * basePower) % modulus; 
       basePower = (basePower * base) % modulus;
     }
 
@@ -38,15 +38,12 @@ class HashTable {
       throw new Error("In operatia Insert, key must be a string");
     }
 
-    // check load factor is normalize or not
     if (this.size / this.capacity > LOAD_FACTOR ) {
         this.resize()
     }
 
-    // find slot 
     let slot = this.stringHash(key) % this.capacity;
     
-    // check if this slot in table are empty, creating list
 
     let newNode = new Node(key, value);
     newNode.next = this.table[slot];
@@ -57,12 +54,9 @@ class HashTable {
   search(key) {
     
     let slot = this.stringHash(key) % this.capacity;
-
     let slotOfTable = this.table[slot];
 
-    if (slotOfTable === undefined) {
-        return null;
-    }
+    if (slotOfTable === undefined) return null;
 
     while(slotOfTable) {
         if (slotOfTable.key == key) {
